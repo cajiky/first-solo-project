@@ -19,9 +19,18 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = 'INSERT INTO person (username, password) VALUES ($1, $2) RETURNING id';
+  let queryText = `INSERT INTO person (username, password) VALUES ($1, $2) RETURNING id;`;
   pool.query(queryText, [username, password])
-    .then(() => { res.sendStatus(201); })
+    .then((result) => {
+       const id = result.rows[0].id;
+       queryText = `INSERT INTO players (person_id) VALUES ($1) RETURNING id;`;
+          pool.query(queryText, [id])
+            .then((result)=>{
+              res.sendStatus(201)
+              console.log(result.rows);
+            })
+            .catch((err) => {next(err);res.sendStatus(500); });
+      })
     .catch((err) => { next(err); });
 });
 
@@ -35,6 +44,7 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 
 // clear all server session information about this user
 router.post('/logout', (req, res) => {
+  console.log(req.user);
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);

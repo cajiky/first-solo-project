@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Input from '@material-ui/core/Input';
 
 class LoginPage extends Component {
   state = {
     username: '',
     password: '',
+    showPassword: false,
   };
 
   login = (event) => {
@@ -45,7 +47,7 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="username">
               Username:
-              <input
+              <Input
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -56,7 +58,7 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="password">
               Password:
-              <input
+              <Input
                 type="password"
                 name="password"
                 value={this.state.password}

@@ -1,11 +1,45 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  withoutLabel: {
+    marginTop: theme.spacing.unit * 3,
+  },
+  textField: {
+    flexBasis: 200,
+  },
+});
+
 
 class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    showPassword: false
   };
+
+  
 
   registerUser = (event) => {
     event.preventDefault();
@@ -29,7 +63,12 @@ class RegisterPage extends Component {
     });
   }
 
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   render() {
+    const { classes } = this.props;
     return (
       <div>
         {this.props.errors.registrationMessage && (
@@ -43,29 +82,45 @@ class RegisterPage extends Component {
         <form onSubmit={this.registerUser}>
           <h1>Register User</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
+            <FormControl className={classNames(classes.margin, classes.textField)}>
+            <InputLabel htmlFor="username">User Name</InputLabel>
+              <Input
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
+                inputProps={{
+                  startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+                }}
               />
-            </label>
+            </FormControl>
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
+          <FormControl className={classNames(classes.margin, classes.textField)}>
+            <InputLabel htmlFor="password">Password</ InputLabel>
+              <Input
                 name="password"
+                type={this.state.showPassword ? 'text' : 'password'}
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="Toggle Password Visibility"
+                      onClick={this.handleClickShowPassword}>
+                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-            </label>
+          </FormControl>
           </div>
           <div>
-            <input
+            <Input
               className="register"
               type="submit"
               name="submit"
@@ -74,13 +129,13 @@ class RegisterPage extends Component {
           </div>
         </form>
         <center>
-          <button
+          <Button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login
-          </button>
+          </Button>
         </center>
       </div>
     );
@@ -94,5 +149,9 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
+RegisterPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(RegisterPage));
 
