@@ -12,7 +12,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid'
-
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 //import css
 import './PlayerProfileEdit.css';
 
@@ -153,7 +154,36 @@ class PlayerProfileEdit extends Component {
                      }}
                    />
                     </FormControl>
-                    
+                    <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel
+                        ref={ref => {
+                        this.InputLabelRef = ref;
+                        }}
+                        htmlFor="outlined-age-native-simple"
+                    >
+                        Role
+                    </InputLabel>
+                    <Select
+                        native
+                        value={this.state.role}
+                        onChange={this.handleChange}
+                        input={
+                        <OutlinedInput
+                            name="role"
+                            labelWidth={this.state.labelWidth}
+                            id="outlined-role-native-simple"
+                        />
+                        }
+                    >
+                        <option value='' />
+                        {this.props.reduxState.editPlayerReducer.map(role => (
+                            <option key={role.id} value={role.id}>{role.role}</option> 
+
+                         ))} 
+                        
+                        
+                    </Select>
+        </FormControl>
                      </form>
                 </div>
                 </Grid>
