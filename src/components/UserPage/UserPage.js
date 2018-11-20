@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import Button from '@material-ui/core/Button';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -12,6 +14,7 @@ const UserPage = (props) => (
     </h1>
     <p>Your ID is: {props.user.id}</p>
     <LogOutButton className="log-in" />
+    <Button></Button>
   </div>
 );
 
