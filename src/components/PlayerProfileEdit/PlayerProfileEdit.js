@@ -36,6 +36,8 @@ import './PlayerProfileEdit.css';
   });
 
 class PlayerProfileEdit extends Component {
+
+    //Initial State
     state = {
         alias: '',
         firstName: '',
@@ -59,6 +61,14 @@ class PlayerProfileEdit extends Component {
 
     printState = () => {
         console.log(this.state);
+    }
+//DISPATCH TO THE SAGAS TO GET THE ROLES TO MAP THEM TO THE DROP DOWN MENU
+    getRoles = () => {
+        this.props.dispatch({type:'GET_ROLES'})
+    }
+
+    componentDidMount(){
+        this.getRoles()
     }
 
     render(){
@@ -143,6 +153,7 @@ class PlayerProfileEdit extends Component {
                      }}
                    />
                     </FormControl>
+                    
                      </form>
                 </div>
                 </Grid>
