@@ -24,6 +24,7 @@ import './PlayerProfileEdit.css';
       display: 'flex',
       flexWrap: 'wrap',
       flexGrow: 1,
+      grow: 1,
     },
     margin: {
       margin: theme.spacing.unit,
@@ -60,6 +61,12 @@ class PlayerProfileEdit extends Component {
         console.log(this.state);
     }
 
+    //Will run as soon as the submit changes button is pressed. going to send our new edited info to the db
+    submitEdit = (event) =>{
+        event.preventDefault();
+        
+    }
+
     printState = () => {
         console.log(this.state);
     }
@@ -77,7 +84,7 @@ class PlayerProfileEdit extends Component {
         return(
         <div className="main-container">
             <Grid container spacing={24}> 
-                <Grid item md={6}>
+                <Grid item xs={6}>
                     <div className="left-col">
                     <form onSubmit={this.submitEdit}>
                     <FormControl className={classNames(classes.margin, classes.textField)}> 
@@ -138,54 +145,75 @@ class PlayerProfileEdit extends Component {
                     </form>
                 </div>
                 </Grid>
-                <Grid item md={6}>
-                <div className="right-col">
-                     <form>
-                     <FormControl className={classNames(classes.margin, classes.textField)}>
-                    <TextField 
-                     name="dob"
-                     label="Birthday"
-                     type="date"
-                     onChange={this.handleChange}
-                     value={this.state.dob}
-                     className={classes.textField}
-                     InputLabelProps={{
-                       shrink: true,
-                     }}
-                   />
-                    </FormControl>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel
-                        ref={ref => {
-                        this.InputLabelRef = ref;
-                        }}
-                        htmlFor="outlined-age-native-simple"
-                    >
-                        Role
-                    </InputLabel>
-                    <Select
-                        native
-                        value={this.state.role}
-                        onChange={this.handleChange}
-                        input={
-                        <OutlinedInput
-                            name="role"
-                            labelWidth={this.state.labelWidth}
-                            id="outlined-role-native-simple"
-                        />
-                        }
-                    >
-                        <option value='' />
-                        {this.props.reduxState.editPlayerReducer.map(role => (
-                            <option key={role.id} value={role.id}>{role.role}</option> 
+                <Grid item xs={6}>
+                    <div className="right-col">
+                        <form>
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                                <TextField 
+                                name="dob"
+                                label="Birthday"
+                                type="date"
+                                onChange={this.handleChange}
+                                value={this.state.dob}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                shrink: true,
+                                }}
+                            />
+                                </FormControl>
+                                <FormControl variant="outlined" className={classes.formControl}>
+                                <InputLabel
+                                    ref={ref => {
+                                    this.InputLabelRef = ref;
+                                    }}
+                                    htmlFor="outlined-age-native-simple"
+                                >
+                                    Role
+                                </InputLabel>
+                                <Select
+                                    native
+                                    value={this.state.role}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="role"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-role-native-simple"
+                                    />
+                                    }
+                                >
+                                    <option value='' />
+                                    {this.props.reduxState.editPlayerReducer.map(role => (
+                                        <option key={role.id} value={role.id}>{role.role}</option> 
 
-                         ))} 
-                        
-                        
-                    </Select>
-        </FormControl>
-                     </form>
-                </div>
+                                    ))} 
+                                </Select>
+                            </FormControl>
+                            <br />
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                            <InputLabel htmlFor="teamId">Team ID</InputLabel>
+                        <Input
+                            type="text"
+                            name="teamId"
+                            value={this.state.teamId}
+                            onChange={this.handleChange}
+                        />
+                            </FormControl>
+                            <br />
+                            <img src="https://fillmurray.com/100/100" />
+                            <br />
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                            <InputLabel htmlFor="img">Profile Image URL</InputLabel>
+                        <Input
+                            type="text"
+                            name="img"
+                            value={this.state.img}
+                            onChange={this.handleChange}
+                        />
+                            </FormControl>
+                            <Button variant="extendedFab" type="submit" onClick={this.submitEdit}>Submit Changes</Button>
+                        </form>
+                    </div>
                 </Grid>
             </Grid>
         </div>
