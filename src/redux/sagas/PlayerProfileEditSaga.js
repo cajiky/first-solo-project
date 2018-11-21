@@ -24,9 +24,22 @@ function* submitEditSaga(action) {
     }
 }
 
+//SAGA IN CHARGE OF GETTING THE INITIAL STATE OF A PLAYER TO USE INSIDE OF THE TEXT FIELDS OF PlayerProfileEditPage
+function* getInitStateSaga() {
+    console.log('inside getInitStateSaga');
+    try{
+        let response = yield call(axios.get, '/api/editPlayer/');
+        yield put({type:'SET_INIT_STATE', payload: response.data});
+    }
+    catch(error){
+        console.log('error in our getInitStateSaga', error);
+    }
+}
+
 function* playerProfileEditSaga(){
     yield takeEvery('GET_ROLES', getRolesSaga);
     yield takeEvery('SUBMIT_NEW_EDIT_SAGA', submitEditSaga);
+    yield takeEvery('GET_INIT_STATE', getInitStateSaga);
 }
 
 export default playerProfileEditSaga;

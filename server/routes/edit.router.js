@@ -2,11 +2,16 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+//Get route incharge of getting initial state from the db
 router.get('/', (req, res) => {
-    
+   let sqlText = `SELECT * FROM "players" WHERE person_id = $1;`
+   pool.query(sqlText,[req.user.id])
+    .then((result) => {
+        res.send(result.rows);
+    })
+    .catch((error) => {
+        console.log('error in our get init state request', error);
+    })
 });
 
 /**

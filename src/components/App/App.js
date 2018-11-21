@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import PlayerProfileEdit from '../PlayerProfileEdit/PlayerProfileEdit';
+import PlayerProfile from '../PlayerProfile/PlayerProfile';
 
 import './App.css';
 
@@ -61,6 +62,12 @@ class App extends Component {
             exact 
             path="/playerEdit"
             component={PlayerProfileEdit}
+            />
+            {/* This is the route to the player Profile page */}
+            <ProtectedRoute
+            exact
+            path="/profile"
+            component={PlayerProfile}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

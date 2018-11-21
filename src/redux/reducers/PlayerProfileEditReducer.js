@@ -1,4 +1,4 @@
-const editPlayerReducer = (state = [], action) => {
+const setRolesReducer = (state = [], action) => {
     switch (action.type) {
       case 'SEND_ROLES_TO_REDUCER':
         return action.payload;
@@ -7,4 +7,4 @@ const editPlayerReducer = (state = [], action) => {
     }
   };
 
-  export default editPlayerReducer;
+  export default setRolesReducer;

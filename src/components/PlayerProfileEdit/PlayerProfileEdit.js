@@ -13,9 +13,13 @@ import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid'
 import Select from '@material-ui/core/Select';
+import Card from '@material-ui/core/Card';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 //import css
 import './PlayerProfileEdit.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
 
 
  //Material Styles for inputs
@@ -35,22 +39,26 @@ import './PlayerProfileEdit.css';
     textField: {
       flexBasis: 200,
     },
+    bigCards: {
+        marginTop: theme.spacing.unit *5,
+        maxWidth: 400,
+    }
   });
 
 class PlayerProfileEdit extends Component {
 
     //Initial State
     state = {
-        alias: '',
-        firstName: '',
-        lastName: '',
-        esea: '',
-        cevo: '',
-        faceit: '',
-        dob: '',
-        role: '',
-        teamId: '',
-        img: '',
+        alias: this.props.reduxState.userPlayerReducer.alias,
+        firstName: this.props.reduxState.userPlayerReducer.first_name,
+        lastName: this.props.reduxState.userPlayerReducer.last_name,
+        esea: this.props.reduxState.userPlayerReducer.esea,
+        cevo: this.props.reduxState.userPlayerReducer.cevo,
+        faceit: this.props.reduxState.userPlayerReducer.faceit,
+        dob: this.props.reduxState.userPlayerReducer.dob,
+        role: this.props.reduxState.userPlayerReducer.role,
+        teamId: this.props.reduxState.userPlayerReducer.team,
+        img: this.props.reduxState.userPlayerReducer.image_url,
     };
 
     //Will handle change whenever an imput is changed
@@ -65,33 +73,44 @@ class PlayerProfileEdit extends Component {
     submitEdit = (event) =>{
         event.preventDefault();
         this.props.dispatch({type:'SUBMIT_NEW_EDIT_SAGA', payload: this.state});
+        this.props.history.push('/profile');
     }
 
     printState = () => {
         console.log(this.state);
     }
-//DISPATCH TO THE SAGAS TO GET THE ROLES TO MAP THEM TO THE DROP DOWN MENU
+    //Dispatch TO GET THE INTIAL STATE OF A PLAYERS PROFILE
+    getInitState = () => {
+        this.props.dispatch({type:'GET_INIT_STATE'})
+        console.log(this.state);
+    }
+    //DISPATCH TO THE SAGAS TO GET THE ROLES TO MAP THEM TO THE DROP DOWN MENU
     getRoles = () => {
         this.props.dispatch({type:'GET_ROLES'})
     }
 
+
     componentDidMount(){
         this.getRoles()
+        this.getInitState()
     }
 
     render(){
         const { classes } = this.props;
         return(
+            <React.Fragment> 
+            <CssBaseline />
         <div className="main-container">
-            <Grid container spacing={24}> 
+            <Grid container spacing={8} direction="row" alignItems="center" justify="space-evenly" className={classes.root} > 
                 <Grid item xs={6}>
-                    <div className="left-col">
+                <Card className={classNames(classes.bigCards)}>
                     <form onSubmit={this.submitEdit}>
                     <FormControl className={classNames(classes.margin, classes.textField)}> 
                         <InputLabel htmlFor="alias">ALIAS (REQUIRED)</InputLabel>
                         <Input
                             type="text"
                             name="alias"
+                            label="alias"
                             value={this.state.alias}
                             onChange={this.handleChange}
                             required
@@ -143,10 +162,10 @@ class PlayerProfileEdit extends Component {
                         />
                     </FormControl>
                     </form>
-                </div>
+                </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <div className="right-col">
+                <Card className={classNames(classes.bigCards)}> 
                         <form>
                             <FormControl className={classNames(classes.margin, classes.textField)}>
                                 <TextField 
@@ -183,13 +202,11 @@ class PlayerProfileEdit extends Component {
                                     }
                                 >
                                     <option value='' />
-                                    {this.props.reduxState.editPlayerReducer.map(role => (
+                                    {this.props.reduxState.setRolesReducer.map(role => (
                                         <option key={role.id} value={role.id}>{role.role}</option> 
-
-                                    ))} 
+                                        ))} 
                                 </Select>
                             </FormControl>
-                            <br />
                             <FormControl className={classNames(classes.margin, classes.textField)}>
                             <InputLabel htmlFor="teamId">Team ID</InputLabel>
                         <Input
@@ -200,7 +217,7 @@ class PlayerProfileEdit extends Component {
                         />
                             </FormControl>
                             <br />
-                            <img src="https://fillmurray.com/100/100" />
+                            <img src={this.props.reduxState.userPlayerReducer.image_url} height="100px" width="100px" />
                             <br />
                             <FormControl className={classNames(classes.margin, classes.textField)}>
                             <InputLabel htmlFor="img">Profile Image URL</InputLabel>
@@ -211,12 +228,14 @@ class PlayerProfileEdit extends Component {
                             onChange={this.handleChange}
                         />
                             </FormControl>
+                            <br />
                             <Button variant="extendedFab" type="submit" onClick={this.submitEdit}>Submit Changes</Button>
                         </form>
-                    </div>
+                    </Card>
                 </Grid>
             </Grid>
         </div>
+        </React.Fragment>
         )
     }
 }
