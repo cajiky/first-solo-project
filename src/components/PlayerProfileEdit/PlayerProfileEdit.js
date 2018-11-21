@@ -64,7 +64,7 @@ class PlayerProfileEdit extends Component {
     //Will run as soon as the submit changes button is pressed. going to send our new edited info to the db
     submitEdit = (event) =>{
         event.preventDefault();
-        
+        this.props.dispatch({type:'SUBMIT_NEW_EDIT_SAGA', payload: this.state});
     }
 
     printState = () => {
