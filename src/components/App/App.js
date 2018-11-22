@@ -20,6 +20,7 @@ import PlayerProfileEdit from '../PlayerProfileEdit/PlayerProfileEdit';
 import PlayerProfile from '../PlayerProfile/PlayerProfile';
 
 import './App.css';
+import { userInfo } from 'os';
 
 class App extends Component {
   componentDidMount () {
@@ -33,7 +34,7 @@ class App extends Component {
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/profile" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route
