@@ -89,7 +89,7 @@ class LoginPage extends Component {
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
                 inputProps={{
-                  startAdornment: (
+                  startadornment: (
                   <InputAdornment position="start">
                     <AccountCircle />
                   </InputAdornment>

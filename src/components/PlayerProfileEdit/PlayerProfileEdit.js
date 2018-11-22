@@ -28,7 +28,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
       display: 'flex',
       flexWrap: 'wrap',
       flexGrow: 1,
-      grow: 1,
     },
     margin: {
       margin: theme.spacing.unit,
@@ -42,7 +41,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
     bigCards: {
         marginTop: theme.spacing.unit *5,
         maxWidth: 400,
-    }
+    },
+    textInputs: {
+        width: 350,
+    },
+    grid:{
+        width:500,
+        alignContent: 'stretch',
+    },
   });
 
 class PlayerProfileEdit extends Component {
@@ -101,8 +107,8 @@ class PlayerProfileEdit extends Component {
             <React.Fragment> 
             <CssBaseline />
         <div className="main-container">
-            <Grid container spacing={8} direction="row" alignItems="center" justify="space-evenly" className={classes.root} > 
-                <Grid item xs={6}>
+            <Grid container spacing={8} direction="row" alignItems="center" justify="space-evenly" className="main-container" > 
+                <Grid item xs={6} className={classNames(classes.grid)}>
                 <Card className={classNames(classes.bigCards)}>
                     <form onSubmit={this.submitEdit}>
                     <FormControl className={classNames(classes.margin, classes.textField)}> 
@@ -113,6 +119,7 @@ class PlayerProfileEdit extends Component {
                             label="alias"
                             value={this.state.alias}
                             onChange={this.handleChange}
+                            className={classNames(classes.textInputs)}
                             required
                         />
                     </FormControl>
@@ -139,6 +146,7 @@ class PlayerProfileEdit extends Component {
                         <Input
                             type="text"
                             name="esea"
+                            className={classNames(classes.textInputs)}
                             value={this.state.esea}
                             onChange={this.handleChange}
                         />
@@ -148,6 +156,7 @@ class PlayerProfileEdit extends Component {
                         <Input
                             type="text"
                             name="cevo"
+                            className={classNames(classes.textInputs)}
                             value={this.state.cevo}
                             onChange={this.handleChange}
                         />
@@ -157,6 +166,7 @@ class PlayerProfileEdit extends Component {
                         <Input
                             type="text"
                             name="faceit"
+                            className={classNames(classes.textInputs)}
                             value={this.state.faceit}
                             onChange={this.handleChange}
                         />
