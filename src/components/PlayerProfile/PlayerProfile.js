@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
@@ -36,6 +35,11 @@ class PlayerProfile extends Component {
         this.props.history.push('/playerEdit');
         console.log('click');
     }
+    //Function to route the user to the create team page on the button click
+    moveToCreateTeam = () => {
+        this.props.history.push('/createTeam');
+    }
+
     //getting our redux state for this particular user as soon as our component mounts.
     componentDidMount(){
         this.getReduxState()
@@ -63,7 +67,7 @@ class PlayerProfile extends Component {
                             <Typography variant="button"><a href={this.props.reduxState.userPlayerReducer.cevo}>CEVO</a></Typography>
                             <Typography variant="button"><a href={this.props.reduxState.userPlayerReducer.faceit}>FaceIt</a></Typography>
                             <br />
-                            <Button variant="raised">Create Team</Button>
+                            <Button onClick={this.moveToCreateTeam} variant="raised">Create Team</Button>
                             <br />
                             <br />
                             <Button onClick={this.moveToEditProfile} variant="raised">Edit Profile</Button>

@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import PlayerProfileEdit from '../PlayerProfileEdit/PlayerProfileEdit';
 import PlayerProfile from '../PlayerProfile/PlayerProfile';
+import CreateTeamPage from '../CreateTeamPage/CreateTeamPage';
 
 import './App.css';
 import { userInfo } from 'os';
@@ -69,6 +70,12 @@ class App extends Component {
             exact
             path="/profile"
             component={PlayerProfile}
+            />
+            {/* THis is the route to the "Create Team Page" */}
+            <ProtectedRoute
+            exact
+            path="/createTeam"
+            component={CreateTeamPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
