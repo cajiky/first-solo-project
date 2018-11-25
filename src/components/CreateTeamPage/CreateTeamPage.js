@@ -37,7 +37,6 @@ class CreateTeamPage extends Component {
         faceitLink: '',
         calLink: '',
         teamPhotoURL: '',
-        
     }
 
     // this will update our state as soon as we change the content inside of our input feild.
@@ -121,59 +120,24 @@ class CreateTeamPage extends Component {
                         <Card className={(classNames(classes.Card))}>
                                 <Grid container spacing={16}>
                                     <form >
-                                        <Grid item xs={12}>
-                                            <FormControl> 
-                                                <InputLabel htmlFor="teamName">Team Name (Required)</InputLabel>
+                                        <Grid item xs={12} justifyContent="center" >
+                                            <img src="https://fillmurray.com/200/200" alt="team image" align="center" />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                        <FormControl> 
+                                                <InputLabel htmlFor="teamPhotoURL">Team Image Link</InputLabel>
                                                 <Input
                                                     // style={(classNames(classes.Inputs))}
                                                     type="text"
-                                                    name="teamName"
-                                                    value={this.state.teamName}
-                                                    onChange={this.handleChange}
-                                                    margin="normal"
-                                                    required
-                                                />
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <FormControl>
-                                                <InputLabel htmlFor="eseaLink">ESEA Link</InputLabel>
-                                                <Input
-                                                    type="text"
-                                                    name="eseaLink"
-                                                    value={this.state.eseaLink}
-                                                    onChange={this.handleChange}
-                                                    margin="normal"
-                                                />
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <FormControl> 
-                                                <InputLabel htmlFor="cevoLink">CEVO Link</InputLabel>
-                                                <Input
-                                                    // style={(classNames(classes.Inputs))}
-                                                    type="text"
-                                                    name="cevoLink"
-                                                    value={this.state.cevoLink}
-                                                    onChange={this.handleChange}
-                                                    margin="normal"
-                                                    
-                                                />
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <FormControl> 
-                                                <InputLabel htmlFor="faceitLink">FaceIt Link</InputLabel>
-                                                <Input
-                                                    // style={(classNames(classes.Inputs))}
-                                                    type="text"
-                                                    name="faceitLink"
+                                                    name="teamPhotoURL"
                                                     value={this.state.faceitLink}
                                                     onChange={this.handleChange}
                                                     margin="normal"
-                                                    
                                                 />
                                             </FormControl>
+                                            <Grid item xs={6}>
+                                                <Button variant="extendedFab" type="submit" onClick={this.submitEdit}>Submit Changes</Button>
+                                            </Grid>
                                         </Grid>
                                     </form>
                                 </Grid>
