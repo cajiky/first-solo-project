@@ -47,6 +47,10 @@ class CreateTeamPage extends Component {
         console.log(this.state);
     }
 
+    // function that will run on the submit the information filled out in the form to the db
+    sumbitTeamInfo = () => {
+        this.props.dispatch({type:'SUBMIT_TEAM_SAGA', payload: this.state});
+    }
     render(){
         const { classes } = this.props;
         return(
