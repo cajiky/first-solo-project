@@ -123,7 +123,7 @@ class CreateTeamPage extends Component {
                         <Grid item xs={6}>
                         <Card className={(classNames(classes.Card))}>
                                 <Grid container spacing={16}>
-                                    <form >
+                                    <form onSubmit={this.sumbitTeamInfo}>
                                         <Grid item xs={12} justifyContent="center" >
                                             <img src="https://fillmurray.com/200/200" alt="team image" align="center" />
                                         </Grid>
@@ -134,7 +134,7 @@ class CreateTeamPage extends Component {
                                                     // style={(classNames(classes.Inputs))}
                                                     type="text"
                                                     name="teamPhotoURL"
-                                                    value={this.state.faceitLink}
+                                                    value={this.state.teamPhotoURL}
                                                     onChange={this.handleChange}
                                                     margin="normal"
                                                 />
