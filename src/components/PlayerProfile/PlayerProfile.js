@@ -33,7 +33,6 @@ class PlayerProfile extends Component {
     //Function to route to the PlayerProfileEdit Page coming from the button
     moveToEditProfile = () => {
         this.props.history.push('/playerEdit');
-        console.log('click');
     }
     //Function to route the user to the create team page on the button click
     moveToCreateTeam = () => {
@@ -87,4 +86,4 @@ class PlayerProfile extends Component {
 }
 
 const mapStateToProps = reduxState => ({ reduxState });
-export default connect(mapStateToProps)(withStyles(styles)(PlayerProfile))
+export default connect(mapStateToProps)(withStyles(styles)(PlayerProfile));

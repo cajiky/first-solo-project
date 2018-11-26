@@ -2,10 +2,38 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
+//In charge of getting the data for a particular users team.
 router.get('/', (req, res) => {
-
+    pool.query(`SELECT * FROM "teams" WHERE owner = ${req.user.id}`)
+    .then((result) => {
+        console.log('this is our response from the sever on our get teams query', result.rows);
+        res.send(result.rows);
+    })
+    .catch((error) => {
+        console.log('error making request to db on the "Get teams query"', error)
+        res.sendStatus(500);
+    })
 });
+
+//going to check to see if the loggedin user is the owner of a team
+router.get('/teamOwner',(req, res) => {
+    pool.query(`SELECT * FROM "teams"`)
+    .then((result) => {
+        let isTeamOwner;
+        for(let i = 0; i < result.rows.length; i++){
+            if(req.user.id === result.rows[i].owner){
+                isTeamOwner = true;
+            }
+            else{
+                isTeamOwner = false;
+            }
+        }
+        res.send(isTeamOwner);
+    })
+    .catch((error) => {
+        console.log('error in our /teamOwner', error)
+    })
+})
 
 //Post route to getting the data from the create team page uploaded to the teams table in the db.
 router.post('/', (req, res) => {
