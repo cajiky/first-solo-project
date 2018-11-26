@@ -53,7 +53,7 @@ class PlayerProfile extends Component {
                 direction="row"
                 justify="center"
                 alignItems="stretch"
-                spaceing={16} style={{padding: 24}}>
+                spacing={16} style={{padding: 24}}>
                     <Grid item sm={3} spacing={16}>
                         <Card className={(classNames(classes.Card))}>
                             <img src={this.props.reduxState.userPlayerReducer.image_url} height="300" width="300" alt="ProfileImg"></img>
