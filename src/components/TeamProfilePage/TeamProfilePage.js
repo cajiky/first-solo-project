@@ -23,6 +23,10 @@ class TeamProfilePage extends Component {
         this.props.history.push('/createTeam');
     }
 
+    changeToBuildTactic = () => {
+        this.props.history.push('/buildTactic');
+    }
+
 
     render() {
         const isTeamOwner = this.props.reduxState.teamOwnerReducer;
@@ -30,15 +34,13 @@ class TeamProfilePage extends Component {
         //if statement to determine what component gets rendered.
         if(isTeamOwner){
             console.log('inside of isTeamOwner condi')
-            component = <TeamAdminComponent moveToCreateTeamPage={this.changeToTeamEdit} />
+            component = <TeamAdminComponent moveToCreateTeamPage={this.changeToTeamEdit} moveToBuildTacticPage={this.changeToBuildTactic} />
         }
         else{
             
         }
         return (
             <div> 
-                <h1>Team Profile Page</h1>
-                {JSON.stringify(this.props.reduxState.teamOwnerReducer)}
                 {component}
             </div>
         )

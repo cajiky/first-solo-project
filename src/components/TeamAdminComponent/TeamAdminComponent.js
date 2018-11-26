@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
     Card:{
         padding: 20,
+        alignItems: 'center'
     },
     portalCard:{
         padding: 20,
@@ -42,7 +43,7 @@ class TeamAdminComponent extends Component {
                 justify="center"
                 alignItems="stretch"
                 spacing={16} style={{padding: 24}}>
-                <Grid item xs={16}> 
+                <Grid item xs={3}> 
                     <Card className={(classNames(classes.Card))}>
                         <img src={this.props.reduxState.teamReducer.img} height="200"  alt="ProfileImg"></img>
                         <Typography  variant="display1" align="center">
@@ -59,16 +60,16 @@ class TeamAdminComponent extends Component {
                         </Button>
                         <br />
                         <br />
-                        <Button variant="raised">
+                        <Button variant="raised" onClick={this.props.moveToBuildTacticPage}>
                             Build Tactic
                         </Button>
                     </Card>
                 </Grid>
-                <Grid item xs={9}>
-                    <Card className={(classNames(classes.portalCard))}>
-                        <Typography variant="h1" align="center">DISPLAY SOME STUFF</Typography>
-                    </Card>
-                </Grid>
+                    <Grid item xs={9}>
+                        <Card className={(classNames(classes.portalCard))}>
+                            <Typography variant="h1" align="center">DISPLAY SOME STUFF</Typography>
+                        </Card>
+                    </Grid>
                 </Grid>
             </div>
         )
