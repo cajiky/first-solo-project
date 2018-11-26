@@ -64,6 +64,11 @@ class TeamAdminComponent extends Component {
                         </Button>
                     </Card>
                 </Grid>
+                <Grid item xs={9}>
+                    <Card className={(classNames(classes.portalCard))}>
+                        <Typography variant="h1" align="center">DISPLAY SOME STUFF</Typography>
+                    </Card>
+                </Grid>
                 </Grid>
             </div>
         )

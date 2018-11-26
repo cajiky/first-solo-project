@@ -11,6 +11,7 @@ import 'typeface-roboto';
 const styles = theme => ({
     Card:{
         padding: 20,
+        maxWidth: 300,
     },
     portalCard:{
         padding: 20,
@@ -19,6 +20,7 @@ const styles = theme => ({
     // portalCard:{
     //     display: 
     // }
+
 })
 
 
@@ -52,7 +54,8 @@ class PlayerProfile extends Component {
                 direction="row"
                 justify="center"
                 alignItems="stretch"
-                spacing={16} style={{padding: 24}}>
+                alignContent="center"
+                spacing={16} style={{padding: 20}}>
                     <Grid item sm={3} spacing={16}>
                         <Card className={(classNames(classes.Card))}>
                             <img src={this.props.reduxState.userPlayerReducer.image_url} height="300" width="300" alt="ProfileImg"></img>
