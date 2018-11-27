@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typogrophy from '@material-ui/core/Typography';
@@ -49,6 +48,10 @@ const styles = theme => ({
 class BuildTactic extends Component {
     state={
         labelWidth: 30,
+        tacticName: '',
+        tacticDescription: '',
+        map: '',
+        imgUrl: '',
     }
 
     //Function that will compile all the data on the form and dispatch it to the db
@@ -64,6 +67,14 @@ class BuildTactic extends Component {
         console.log(this.state);
     }
 
+    // Function in charge of getting the maps from the db and store them in the redux state for us to map in the drop down.
+    getMaps = () => {
+        this.props.dispatch({type:'GET_MAPS_SAGA'})
+    }
+
+    componentDidMount(){
+        this.getMaps();
+    }
 
     render(){
       const { classes } = this.props;
@@ -85,6 +96,9 @@ class BuildTactic extends Component {
                                         <Grid item xs={9}>
                                             <TextField
                                             className={classes.textField}
+                                            onChange={this.handleChange}
+                                            value={this.state.tacticName}
+                                            name='tacticName'
                                             label="Tactic Name"
                                             required
                                             />
@@ -92,6 +106,9 @@ class BuildTactic extends Component {
                                         <Grid item xs={12}>
                                             <TextField
                                             className={classes.descriptionField}
+                                            onChange={this.handleChange}
+                                            value={this.state.tacticDescription}
+                                            name='tacticDescription'
                                             multiline
                                             rows="4"
                                             variant="outlined"
@@ -107,8 +124,8 @@ class BuildTactic extends Component {
                                                         <Select
                                                             style={{width: 100,}}
                                                             native
-                                                            // value={}
-                                                            // onChange={}
+                                                            value={this.state.map}
+                                                            onChange={this.handleChange}
                                                             input={
                                                             <OutlinedInput
                                                                 name="map"
@@ -116,15 +133,18 @@ class BuildTactic extends Component {
                                                                 id="mapSelect"
                                                             />}>
                                                             <option value='' />
-                                                            {/* {this.props.reduxState.setRolesReducer.map(role => (
-                                                                <option key={role.id} value={role.id}>{role.role}</option> 
-                                                                ))}  */}
+                                                            {this.props.reduxState.mapsReducer.map(map => (
+                                                                <option key={map.id} value={map.id}>{map.maps}</option> 
+                                                                ))} 
                                                         </Select>
                                                     </FormControl>
                                                 </Grid>
                                                 <Grid item xs={9}>
                                                     <TextField
                                                     className={classes.urlTextField}
+                                                    onChange={this.handleChange}
+                                                    value={this.state.imgUrl}
+                                                    name='imgUrl'
                                                     label="Image URL"
                                                     />
                                                 </Grid>

@@ -32,6 +32,8 @@ class TeamAdminComponent extends Component {
     componentDidMount() {
         this.getTeamInfo();
     }
+
+    
     
 
     render() {

@@ -6,6 +6,7 @@ import setRolesReducer from './PlayerProfileEditReducer';
 import userPlayerReducer from './userPlayerProfileReducer';
 import teamReducer from './teamReducer';
 import teamOwnerReducer from './teamOwnerReducer';
+import mapsReducer from './mapsReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   userPlayerReducer, //will take in and manage all of the properties from the logged in users state
   teamReducer, //Will take all the data for a particular team that the user owns/is a part of
   teamOwnerReducer, //Will get called when the server has checked to see if the current user is a team owner and will take that data for the conditional render on the TeamProfilePage.
+  mapsReducer,//Will be used to store maps and tactics 
 });
 
 export default rootReducer;
