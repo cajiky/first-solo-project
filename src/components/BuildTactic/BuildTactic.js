@@ -45,6 +45,7 @@ const styles = theme => ({
     }
 })
 
+
 class BuildTactic extends Component {
     state={
         labelWidth: 30,
@@ -52,14 +53,17 @@ class BuildTactic extends Component {
         tacticDescription: '',
         map: '',
         imgUrl: '',
+        teamId: this.props.reduxState.teamReducer.id,
     }
 
     //Function that will compile all the data on the form and dispatch it to the db
     submitNewTactic = (event) => {
         event.preventDefault();
         this.props.dispatch({type:'SUBMIT_NEW_TACTIC_SAGA', payload: this.state});
+        this.props.history.push('/teamProfile');
     }
-
+    
+    //Function in charge of the change inside of the inputs
     handleChange = (event) => {
         this.setState ({
             [event.target.name]: event.target.value,
@@ -69,8 +73,9 @@ class BuildTactic extends Component {
 
     // Function in charge of getting the maps from the db and store them in the redux state for us to map in the drop down.
     getMaps = () => {
-        this.props.dispatch({type:'GET_MAPS_SAGA'})
+        this.props.dispatch({type:'GET_MAPS_SAGA'});
     }
+    
 
     componentDidMount(){
         this.getMaps();

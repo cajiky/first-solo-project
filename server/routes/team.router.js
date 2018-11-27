@@ -6,11 +6,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
     pool.query(`SELECT * FROM "teams" WHERE owner = ${req.user.id}`)
     .then((result) => {
-        console.log('this is our response from the sever on our get teams query', result.rows);
         res.send(result.rows);
     })
     .catch((error) => {
-        console.log('error making request to db on the "Get teams query"', error)
+        console.log('error in /api/teams/get', error);
         res.sendStatus(500);
     })
 });

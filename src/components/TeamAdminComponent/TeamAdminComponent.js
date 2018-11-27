@@ -25,7 +25,6 @@ class TeamAdminComponent extends Component {
     
     //Will reach out to the server and grab the team info data from the teams table
     getTeamInfo = () => {
-        console.log('inside getTeamInfo dispatch');
         this.props.dispatch({type:'GET_TEAM_DATA_SAGA'})
     }
 

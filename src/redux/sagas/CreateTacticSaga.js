@@ -6,12 +6,17 @@ function* getMapsSaga(){
     yield put({type:'GET_MAPS_REDUCER', payload: maps})
 }
 
+//SAGA in charge of submiting a new tactic >server>db 
+function* submitNewTacticSaga(action){
+    yield call(axios.post, '/api/tactics', action.payload)
+}
+
 
 
 //Main function to export to our main watcher saga
 function* createTacticSaga(){
     yield takeEvery('GET_MAPS_SAGA', getMapsSaga);
-
+    yield takeEvery('SUBMIT_NEW_TACTIC_SAGA', submitNewTacticSaga);
 }
 
 export default createTacticSaga;
