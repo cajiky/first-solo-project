@@ -181,7 +181,7 @@ class PlayerProfileEdit extends Component {
                                     ref={ref => {
                                     this.InputLabelRef = ref;
                                     }}
-                                    htmlFor="outlined-age-native-simple"
+                                    htmlFor="roleSelect"
                                 >
                                     Role
                                 </InputLabel>
@@ -193,7 +193,7 @@ class PlayerProfileEdit extends Component {
                                     <OutlinedInput
                                         name="role"
                                         labelWidth={this.state.labelWidth}
-                                        id="outlined-role-native-simple"
+                                        id="roleSelect"
                                     />
                                     }
                                 >

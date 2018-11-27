@@ -3,40 +3,144 @@ import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
+import Paper from '@material-ui/core/Paper';
 import Typogrophy from '@material-ui/core/Typography';
 import { TextField } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
     Card:{
         padding: 50,
-        alignItems: 'center',
+        width: '50%',
     },
     textField:{
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        marginBottom: 30,
+        width: 300,
+    },
+    containerPaper:{
+        paddingLeft: '20%',
+        paddingRight: '20%',
+        padding: 20,
         
     },
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+    descriptionField:{
+        width: 600,
+    },
+    urlTextField:{
+        marginTop: 30,
+        marginLeft: 70,
+        width: 300,
+        height: 60,
+    },
+    button: {
+    
+    }
 })
 
 class BuildTactic extends Component {
+    state={
+        labelWidth: 30,
+    }
 
+    //Function that will compile all the data on the form and dispatch it to the db
+    submitNewTactic = (event) => {
+        event.preventDefault();
+        this.props.dispatch({type:'SUBMIT_NEW_TACTIC_SAGA', payload: this.state});
+    }
+
+    handleChange = (event) => {
+        this.setState ({
+            [event.target.name]: event.target.value,
+        })
+        console.log(this.state);
+    }
 
 
     render(){
       const { classes } = this.props;
         return(
             <div> 
-            <Typogrophy variant="h1" align="center">Build Tactic</Typogrophy>
-            <Card className={(classNames(classes.Card))}>
-                <TextField
-                className={(classNames(classes.textField))}
-                 fullWidth
-                 label="name"
-                 />
-            </Card>
-        </div>
+                <Typogrophy variant="h1" align="center">Build Tactic</Typogrophy>
+                    <Grid container spacing={16} justify="center" alignItems="center" >
+                        <Grid item xs={6}>
+
+                            <Paper elevation={12} className={classes.containerPaper}>
+                                <form> 
+                                    <Grid
+                                        spacing={16}
+                                        container
+                                        direction="column"
+                                        justify="center"
+                                        alignItems="center"
+                                        >
+                                        <Grid item xs={9}>
+                                            <TextField
+                                            className={classes.textField}
+                                            label="Tactic Name"
+                                            required
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                            className={classes.descriptionField}
+                                            multiline
+                                            rows="4"
+                                            variant="outlined"
+                                            label="Tactic Description"
+                                            required
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Grid container spacing={40} direction="row" justify="space-around" alignItems="flex-end">
+                                                <Grid item xs={3}>
+                                                    <FormControl variant="outlined">
+                                                        <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="mapSelect">Map</InputLabel>
+                                                        <Select
+                                                            style={{width: 100,}}
+                                                            native
+                                                            // value={}
+                                                            // onChange={}
+                                                            input={
+                                                            <OutlinedInput
+                                                                name="map"
+                                                                labelWidth={this.state.labelWidth}
+                                                                id="mapSelect"
+                                                            />}>
+                                                            <option value='' />
+                                                            {/* {this.props.reduxState.setRolesReducer.map(role => (
+                                                                <option key={role.id} value={role.id}>{role.role}</option> 
+                                                                ))}  */}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Grid>
+                                                <Grid item xs={9}>
+                                                    <TextField
+                                                    className={classes.urlTextField}
+                                                    label="Image URL"
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Button variant='extendedFab' color='primary' classname={classes.button} onClick={this.submitNewTactic}>
+                                                Submit Tactic
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </form>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+            </div>
         )
     }
 }
