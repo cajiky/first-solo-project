@@ -14,6 +14,7 @@ const rolesRouter = require('./routes/roles.router');
 const editPlayerRouter = require('./routes/edit.router');
 const teamRouter = require('./routes/team.router');
 const tacticsRouter = require('./routes/tactics.router');
+const playersRouter = require('./routes/players.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/roles', rolesRouter);
 app.use('/api/editPlayer', editPlayerRouter);
 app.use('/api/teams', teamRouter);
 app.use('/api/tactics', tacticsRouter);
+app.use('/api/players', playersRouter);
 
 // Serve static files
 app.use(express.static('build'));

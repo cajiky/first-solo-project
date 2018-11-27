@@ -3,8 +3,14 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-    
+router.post('/private', (req, res) => {
+    pool.query(`SELECT * FROM "tactics" where team=${req.body.team} ORDER BY tactics.map ASC;`)
+    .then((result) => {
+        res.send(result.rows);
+    })
+    .catch((error) => {
+        console.log('error in our post/get tactics from team inside /api/tactics/private', error);
+    })
 });
 
 

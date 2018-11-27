@@ -5,7 +5,8 @@ import userSaga from './userSaga';
 import playerProfileEditSaga from './PlayerProfileEditSaga';
 import teamEditSaga from './TeamEditSaga';
 import teamSaga from './TeamSaga';
-import createTacticsSaga from './CreateTacticSaga';
+import tacticsSaga from './CreateTacticSaga';
+import playerInfoSaga from './playerInfoSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +23,8 @@ export default function* rootSaga() {
     playerProfileEditSaga(),
     teamEditSaga(),
     teamSaga(),
-    createTacticsSaga(),
+    tacticsSaga(),
+    playerInfoSaga(),
+    
   ]);
 }

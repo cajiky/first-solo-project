@@ -11,12 +11,18 @@ function* submitNewTacticSaga(action){
     yield call(axios.post, '/api/tactics', action.payload)
 }
 
+//SAGA in charge of getting a particular teams tactics.
+function* getTeamsTacticsSaga(action){
+    // const teamsTactics = yield call(axios.get, '/api/tactics/private', action.payload);
+}
+
 
 
 //Main function to export to our main watcher saga
-function* createTacticSaga(){
+function* tacticsSaga(){
     yield takeEvery('GET_MAPS_SAGA', getMapsSaga);
     yield takeEvery('SUBMIT_NEW_TACTIC_SAGA', submitNewTacticSaga);
+    yield takeEvery('GET_TEAMS_TACTICS_SAGA', getTeamsTacticsSaga);
 }
 
-export default createTacticSaga;
+export default tacticsSaga;
