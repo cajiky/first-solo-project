@@ -18,6 +18,7 @@ function* submitEditSaga(action) {
     console.log('inside submitEditSaga');
     try{
         yield call(axios.put, '/api/editPlayer/', action.payload)
+        // yield put({type:'GET_ALL_DATA'})
     }
     catch(error){
         console.log('error in our submitEditSaga', error);

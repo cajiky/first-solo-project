@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
    let sqlText = `SELECT * FROM "players" WHERE person_id = $1;`
    pool.query(sqlText,[req.user.id])
     .then((result) => {
+        console.log(result.rows);
         res.send(result.rows);
     })
     .catch((error) => {
@@ -14,12 +15,7 @@ router.get('/', (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
 
-});
 //PUT route from our playerProfileEditSaga to update a row for a user.
 router.put('/', (req,res) => {
     const body = req.body;
@@ -27,9 +23,8 @@ router.put('/', (req,res) => {
     const sqlText = `UPDATE players SET "alias"=$1, "first_name"=$2, "last_name"=$3, "esea"=$4, "cevo"=$5, "faceit"=$6, "dob"=$7,
     "role"=$8, "team"=$9, "image_url"=$10  WHERE "person_id" = ${req.user.id};`
     pool.query(sqlText,[body.alias, body.firstName, body.lastName, body.esea, body.cevo, body.faceit, body.dob, body.role, body.teamId, body.img])
-    .then((result) => {
-        console.log('Result from our edit request to the db', result.rows);
-        res.send(result.rows);
+    .then(() => {
+        res.sendStatus(201);
     })
     .catch((error) => {
         console.log('error in our update request to db from editPlayer', error);

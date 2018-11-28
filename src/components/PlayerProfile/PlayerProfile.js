@@ -49,8 +49,10 @@ class PlayerProfile extends Component {
     //getting our redux state for this particular user as soon as our component mounts.
     componentDidMount(){
         this.getReduxState();
-        this.getUserData();
+        //this.getUserData();
     }
+
+
 
     render(){
         const { classes } = this.props;

@@ -35,7 +35,7 @@ class TacticsPage extends Component {
     }
 
     componentDidMount(){
-        this.getUserInfo();
+        //this.getUserInfo();
         this.getTeamsTactics();
     }
 
