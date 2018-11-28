@@ -3,8 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.post('/private', (req, res) => {
-    pool.query(`SELECT * FROM "tactics" where team=${req.body.team} ORDER BY tactics.map ASC;`)
+router.get('/private', (req, res) => {
+    pool.query(`SELECT tactics.id, tactics.team, tactics.description, tactics.mini_url, tactics.name, maps.maps, teams.name as teamname, maps.map_img FROM "tactics" JOIN "maps" ON tactics.map = maps.id JOIN "teams" ON teams.id = tactics.team WHERE teams.id = ${req.user.id};`)
+   
     .then((result) => {
         res.send(result.rows);
     })

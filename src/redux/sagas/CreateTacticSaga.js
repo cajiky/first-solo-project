@@ -12,8 +12,9 @@ function* submitNewTacticSaga(action){
 }
 
 //SAGA in charge of getting a particular teams tactics.
-function* getTeamsTacticsSaga(action){
-    // const teamsTactics = yield call(axios.get, '/api/tactics/private', action.payload);
+function* getTeamsTacticsSaga(){
+    const teamsTactics = yield call(axios.get, '/api/tactics/private');
+                         yield put({type:'SET_TEAMS_TACTIC_REDUCER', payload: teamsTactics});
 }
 
 

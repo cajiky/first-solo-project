@@ -50,6 +50,9 @@ class TeamAdminComponent extends Component {
                         <Typography  variant="display1" align="center">
                             {this.props.reduxState.teamReducer.name}
                         </Typography>
+                        <Typography variant="subheading" align="center">
+                            Team ID: {this.props.reduxState.teamReducer.id}
+                        </Typography>
                         <br />
                         <Button variant="raised">
                             Events

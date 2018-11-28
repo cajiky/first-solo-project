@@ -27,17 +27,18 @@ class TacticsPage extends Component {
 
     //Function incharge of calling out to db and grabbing all of the tactics for your particular team.
     getTeamsTactics = () => {
-        this.props.dispatch({type:'GET_TEAMS_TACTICS_SAGA', payload: this.props.reduxState.playerReducer.team})
+        this.props.dispatch({type:'GET_TEAMS_TACTICS_SAGA'});
     }
     //Function in charge of getting propper user info
     getUserInfo = () => {
-        this.props.dispatch({type:'GET_USER_DATA_SAGA'})
+        
     }
 
     componentDidMount(){
-        //this.getUserInfo();
         this.getTeamsTactics();
     }
+
+    component
 
     render(){
         const { classes } = this.props;
@@ -49,7 +50,7 @@ class TacticsPage extends Component {
                         <h2>Drop Down</h2>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography variant='h2' align="center" className={classes.heading}>{this.props.reduxState.playerReducer.teamname}'s Tactics</Typography>
+                        <Typography variant='h2' align="center" className={classes.heading}>Tactics</Typography>
                     </Grid>
                     <Grid item xs={4}></Grid>
                 </Grid>
@@ -64,7 +65,7 @@ class TacticsPage extends Component {
                                                 <CardMedia
                                                 component="img"
                                                 className={classes.media}
-                                                image={tactic.mini_url}
+                                                image={tactic.map_img}
                                                 title='Tactic'
                                                 />
                                                 <CardContent>

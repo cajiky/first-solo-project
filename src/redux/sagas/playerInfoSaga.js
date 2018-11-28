@@ -5,8 +5,6 @@ import {call, put, takeEvery } from 'redux-saga/effects';
 function* getUserDataSaga(){
    const userData = yield call(axios.get, '/api/players');
                     yield put({type:'SET_USER_DATA', payload: userData});
-    // const teamTactics = yield call(axios.post, '/api/tactics/private', userData.data[0]);
-    //                 yield put({type:'SET_TEAMS_TACTIC_REDUCER', payload: teamTactics})
 
 }
 

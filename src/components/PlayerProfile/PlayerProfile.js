@@ -41,15 +41,9 @@ class PlayerProfile extends Component {
         this.props.history.push('/createTeam');
     }
 
-    //since the user will be directed here we'll call a function to reach out and grab all of the data we need in order to complete other things on the site.
-    getUserData = () => {
-        this.props.dispatch({type:'GET_USER_DATA_SAGA'});
-    }
-
     //getting our redux state for this particular user as soon as our component mounts.
     componentDidMount(){
         this.getReduxState();
-        //this.getUserData();
     }
 
 

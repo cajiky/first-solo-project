@@ -69,7 +69,6 @@ class PlayerProfileEdit extends Component {
     submitEdit = (event) =>{
         event.preventDefault();
         this.props.dispatch({type:'SUBMIT_NEW_EDIT_SAGA', payload: this.state});
-        this.props.history.push('/profile');
     }
 
     printState = () => {
@@ -83,6 +82,11 @@ class PlayerProfileEdit extends Component {
     //DISPATCH TO THE SAGAS TO GET THE ROLES TO MAP THEM TO THE DROP DOWN MENU
     getRoles = () => {
         this.props.dispatch({type:'GET_ROLES'})
+    }
+
+    //Going to bring the user back to the profile page on the button click
+    b2Profile = () => {
+        this.props.history.push('/profile');
     }
 
 
@@ -225,7 +229,8 @@ class PlayerProfileEdit extends Component {
                         />
                             </FormControl>
                             <br />
-                            <Button variant="extendedFab" type="submit" onClick={this.submitEdit}>Submit Changes</Button>
+                            <Button style={{marginRight: 10,}} variant="extendedFab" type="submit" onClick={this.submitEdit}>Save Changes</Button>
+                            <Button variant="extendedFab" type="submit" onClick={this.b2Profile}>Profile</Button>
                         </form>
                     </Card>
                 </Grid>

@@ -16,15 +16,14 @@ router.get('/', (req, res) => {
 
 //going to check to see if the loggedin user is the owner of a team
 router.get('/teamOwner',(req, res) => {
-    pool.query(`SELECT * FROM "teams"`)
+    pool.query(`SELECT * FROM "teams" ORDER BY id ASC`)
     .then((result) => {
-        let isTeamOwner;
+        // console.log(result.rows);
+        // console.log(req.user.id);
+        let isTeamOwner = false;
         for(let i = 0; i < result.rows.length; i++){
             if(req.user.id === result.rows[i].owner){
                 isTeamOwner = true;
-            }
-            else{
-                isTeamOwner = false;
             }
         }
         res.send(isTeamOwner);
