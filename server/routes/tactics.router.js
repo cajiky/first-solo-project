@@ -4,10 +4,18 @@ const router = express.Router();
 
 
 router.get('/private', (req, res) => {
-    pool.query(`SELECT tactics.id, tactics.team, tactics.description, tactics.mini_url, tactics.name, maps.maps, teams.name as teamname, maps.map_img FROM "tactics" JOIN "maps" ON tactics.map = maps.id JOIN "teams" ON teams.id = tactics.team WHERE teams.id = ${req.user.id};`)
+    pool.query(`SELECT * FROM "players" WHERE id=${req.user.id}`)
    
     .then((result) => {
-        res.send(result.rows);
+        pool.query(`SELECT tactics.id, tactics.team, tactics.description, tactics.mini_url, tactics.name, maps.maps, teams.name as teamname, maps.map_img 
+        FROM "tactics" JOIN "maps" ON tactics.map = maps.id 
+        JOIN "teams" ON teams.id = tactics.team WHERE teams.id = ${result.rows[0].team};`)
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((error)=>{
+            console.log('error inside of our sub query in /private', error)
+        })
     })
     .catch((error) => {
         console.log('error in our post/get tactics from team inside /api/tactics/private', error);

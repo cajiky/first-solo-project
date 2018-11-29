@@ -32,7 +32,7 @@ const styles = theme => ({
         flexWrap: 'wrap',
       },
     descriptionField:{
-        width: 600,
+        width: 400,
     },
     urlTextField:{
         marginTop: 30,
