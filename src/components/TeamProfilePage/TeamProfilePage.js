@@ -26,6 +26,10 @@ class TeamProfilePage extends Component {
     changeToBuildTactic = () => {
         this.props.history.push('/buildTactic');
     }
+    
+    changeToCreateEvent = () => {
+        this.props.history.push('/createEvent');
+    }
 
 
     render() {
@@ -34,7 +38,7 @@ class TeamProfilePage extends Component {
         //if statement to determine what component gets rendered.
         if(isTeamOwner){
             console.log('inside of isTeamOwner condi')
-            component = <TeamAdminComponent moveToCreateTeamPage={this.changeToTeamEdit} moveToBuildTacticPage={this.changeToBuildTactic} />
+            component = <TeamAdminComponent moveToCreateTeamPage={this.changeToTeamEdit} moveToBuildTacticPage={this.changeToBuildTactic} moveToCreateEventPage={this.changeToCreateEvent} />
         }
         else{
             

@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 
-router.get('/private', (req, res) => {
+router.get('/private', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "players" WHERE id=${req.user.id}`)
    
     .then((result) => {
@@ -23,7 +24,7 @@ router.get('/private', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     const tactic = req.body;
     const sqlText = `INSERT INTO "tactics"(name,description,map,mini_url,team)
@@ -39,7 +40,7 @@ router.post('/', (req, res) => {
 });
 
 //Route in charge of getting the maps from the maps table
-router.get('/maps', (req, res) =>{ 
+router.get('/maps', rejectUnauthenticated, (req, res) =>{ 
     pool.query('SELECT * FROM "maps";')
     .then((result) => {
         res.send(result.rows);

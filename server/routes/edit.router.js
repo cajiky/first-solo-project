@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 //Get route incharge of getting initial state from the db
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
    let sqlText = `SELECT * FROM "players" WHERE person_id = $1;`
    pool.query(sqlText,[req.user.id])
     .then((result) => {
@@ -17,7 +18,7 @@ router.get('/', (req, res) => {
 
 
 //PUT route from our playerProfileEditSaga to update a row for a user.
-router.put('/', (req,res) => {
+router.put('/', rejectUnauthenticated, (req,res) => {
     const body = req.body;
     //Sql text
     const sqlText = `UPDATE players SET "alias"=$1, "first_name"=$2, "last_name"=$3, "esea"=$4, "cevo"=$5, "faceit"=$6, "dob"=$7,

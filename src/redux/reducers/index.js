@@ -9,6 +9,7 @@ import teamOwnerReducer from './teamOwnerReducer';
 import mapsReducer from './mapsReducer';
 import playerReducer from './playerReducer';
 import teamsTacticsReducer from './teamsTacticsReducer';
+import eventPageReducer from './eventsPageReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   mapsReducer,//Will be used to store maps and tactics 
   playerReducer, //Will be used to store the user/players information.
   teamsTacticsReducer, //Will store the user's teams tactics for the tactics page
+  eventPageReducer, //Will store event types 
 });
 
 export default rootReducer;
