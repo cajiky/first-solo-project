@@ -20,8 +20,6 @@ const styles = theme => ({
 })
 
 class TeamAdminComponent extends Component {
-    //Will route user to the team edit page
-    
     
     //Will reach out to the server and grab the team info data from the teams table
     getTeamInfo = () => {
@@ -54,7 +52,7 @@ class TeamAdminComponent extends Component {
                             Team ID: {this.props.reduxState.teamReducer.id}
                         </Typography>
                         <br />
-                        <Button variant="raised">
+                        <Button variant="raised" onClick={this.props.moveToCreateEventPage}>
                             Events
                         </Button>
                         <br />

@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 //In charge of getting the data for a particular users team.
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "teams" WHERE owner = ${req.user.id}`)
     .then((result) => {
         res.send(result.rows);
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 //going to check to see if the loggedin user is the owner of a team
-router.get('/teamOwner',(req, res) => {
+router.get('/teamOwner', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "teams" ORDER BY id ASC`)
     .then((result) => {
         // console.log(result.rows);
@@ -34,7 +35,7 @@ router.get('/teamOwner',(req, res) => {
 })
 
 //Post route to getting the data from the create team page uploaded to the teams table in the db.
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const body = req.body;
     const sqlText = `INSERT INTO "teams" (name,cal,esea,cevo,faceit,owner)
                      VALUES($1,$2,$3,$4,$5,$6)`;
