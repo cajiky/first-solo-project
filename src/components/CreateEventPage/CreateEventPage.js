@@ -71,10 +71,29 @@ class CreateEventPage extends Component{
         console.log(this.state);
     }
 
+    //Function in charge of getting data needed for this component
+    getEventTypes = () => {
+        this.props.dispatch({type:'GET_EVENT_TYPES'});
+        this.props.dispatch({type:'GET_TEAM_DATA_SAGA'});
+
+    }
+
+    //Function to send off event data
+    submitNewEvent = () => {
+        this.props.dispatch({type:'SUBMIT_EVENT', payload:{event: this.state, teamId: this.props.reduxState.teamReducer.id}})
+        this.props.history.push('/teamProfile')
+    }
+
+    componentDidMount(){
+        this.getEventTypes();
+    }
+
     state={
         labelWidth: 40,
         eventName: '',
         eventDate: '',
+        start: '',
+        end: '',
     }
 
     render(){
@@ -116,11 +135,12 @@ class CreateEventPage extends Component{
                                         <Grid item xs={4}></Grid>
                                         <Grid item xs={4}>
                                             <TextField
-                                                id="time"
+                                                name="start"
                                                 label="Time Start"
                                                 type="time"
                                                 defaultValue="07:30"
                                                 className={classes.timeSelect}
+                                                value={this.state.start}
                                                 onChange={this.handleChange}
                                                 InputLabelProps={{
                                                 shrink: true,
@@ -142,13 +162,14 @@ class CreateEventPage extends Component{
                                                             onChange={this.handleChange}
                                                             input={
                                                             <OutlinedInput
-                                                                name="map"
+                                                                name="event_type"
                                                                 labelWidth={this.state.labelWidth}
+                                                                onChange={this.handleChange}
                                                                 id="mapSelect"
                                                             />}>
                                                             <option value='' />
-                                                            {this.props.reduxState.mapsReducer.map(type => (
-                                                                <option key={type.id} value={type.id}>{type.name}</option> 
+                                                            {this.props.reduxState.eventPageReducer.map(type => (
+                                                                <option key={type.id} value={type.id}>{type.event_type}</option> 
                                                                 ))} 
                                                         </Select>
                                                     </FormControl>
@@ -156,12 +177,13 @@ class CreateEventPage extends Component{
                                         <Grid item xs={4}></Grid>
                                         <Grid item xs={4}>
                                             <TextField
-                                                id="time"
+                                                name="end"
                                                 label="Time End"
                                                 type="time"
                                                 defaultValue="13:30"
                                                 className={classes.timeSelect}
                                                 onChange={this.handleChange}
+                                                value={this.state.end}
                                                 InputLabelProps={{
                                                 shrink: true,
                                                 }}
@@ -185,7 +207,7 @@ class CreateEventPage extends Component{
                                         />
                                     </Grid>
                                     <Grid item xs={8}>
-                                        <Button variant='extendedFab' color='primary' classname={classes.button} onClick={this.submitNewTactic} size="large">
+                                        <Button variant='extendedFab' color='primary' className={classes.button} onClick={this.submitNewEvent} size="large">
                                             Submit Event
                                         </Button>
                                     </Grid>

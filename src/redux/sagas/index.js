@@ -8,6 +8,7 @@ import teamSaga from './TeamSaga';
 import tacticsSaga from './CreateTacticSaga';
 import playerInfoSaga from './playerInfoSaga';
 import theGodSaga from './theGodSaga';
+import eventsSaga from './EventsSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     tacticsSaga(),
     playerInfoSaga(),
     theGodSaga(),
+    eventsSaga(),
     
   ]);
 }
