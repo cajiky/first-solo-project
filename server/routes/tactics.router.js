@@ -5,18 +5,21 @@ const router = express.Router();
 
 
 router.get('/private', rejectUnauthenticated, (req, res) => {
+    console.log(req.user.id)
     pool.query(`SELECT * FROM "players" WHERE id=${req.user.id}`)
    
     .then((result) => {
-        pool.query(`SELECT tactics.id, tactics.team, tactics.description, tactics.mini_url, tactics.name, maps.maps, teams.name as teamname, maps.map_img 
+        pool.query(`SELECT tactics.id, tactics.team, tactics.description, tactics.name, maps.maps, teams.name as teamname, maps.map_img 
         FROM "tactics" JOIN "maps" ON tactics.map = maps.id 
         JOIN "teams" ON teams.id = tactics.team WHERE teams.id = ${result.rows[0].team};`)
+        
         .then((result) => {
             res.send(result.rows)
         })
         .catch((error)=>{
             console.log('error inside of our sub query in /private', error)
         })
+        console.log(result.rows[0].team)
     })
     .catch((error) => {
         console.log('error in our post/get tactics from team inside /api/tactics/private', error);
@@ -27,9 +30,9 @@ router.get('/private', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     const tactic = req.body;
-    const sqlText = `INSERT INTO "tactics"(name,description,map,mini_url,team)
-                     VALUES($1,$2,$3,$4,$5)`;
-    pool.query(sqlText,[tactic.tacticName, tactic.tacticDescription, tactic.map, tactic.imgUrl, tactic.teamId])
+    const sqlText = `INSERT INTO "tactics"(name,description,map,team)
+                     VALUES($1,$2,$3,$4)`;
+    pool.query(sqlText,[tactic.tacticName, tactic.tacticDescription, tactic.map, tactic.teamId])
     .then((result)=>{
         res.sendStatus(201);
     })

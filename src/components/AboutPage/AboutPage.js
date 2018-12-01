@@ -9,7 +9,14 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Javascript-
+        HTML-
+        React-
+        Postgresql-
+        Material-ui-
+        React-redux-
+        Nodeexpress-
+        Axios
       </p>
     </div>
   </div>
