@@ -53,7 +53,7 @@ class TeamAdminComponent extends Component {
                         </Typography>
                         <br />
                         <Button variant="raised" onClick={this.props.moveToCreateEventPage}>
-                            Events
+                            Create Event
                         </Button>
                         <br />
                         <br />

@@ -20,13 +20,32 @@ const styles = theme => ({
     },
     cardContainer:{
         padding: 40,
+    },
+    expand:{
+        transform: 'rotate(0deg)',
+        transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+    marginLeft: 'auto',
+    [theme.breakpoints.up('sm')]: {
+      marginRight: -8,
+    },
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+      },
+    standardCard: {
+        maxHeight: 400,
     }
 })
 
 class TacticsPage extends Component {
 
+    state = { expanded: false };
+
     //Function incharge of calling out to db and grabbing all of the tactics for your particular team.
     getTeamsTactics = () => {
+        // this.props.dispatch({type:'GET_TEAM_DATA_SAGA'});
         this.props.dispatch({type:'GET_TEAMS_TACTICS_SAGA'});
     }
     //Function in charge of getting propper user info
@@ -60,7 +79,7 @@ class TacticsPage extends Component {
                             <Grid container spacing={24} direction="row" justify="center" alignItems="flex-start" className={classes.cardContainer}>
                                 {this.props.reduxState.teamsTacticsReducer.map(tactic => (
                                     <Grid item xs={4}>
-                                        <Card className={classes.card}>
+                                        <Card className={classes.standardCard}>
                                             <CardActionArea>
                                                 <CardMedia
                                                 component="img"

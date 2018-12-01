@@ -54,7 +54,6 @@ class BuildTactic extends Component {
         tacticName: '',
         tacticDescription: '',
         map: '',
-        imgUrl: '',
         teamId: this.props.reduxState.teamReducer.id,
     }
 
@@ -125,7 +124,7 @@ class BuildTactic extends Component {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Grid container spacing={40} direction="row" justify="space-around" alignItems="flex-end">
-                                                <Grid item xs={3}>
+                                                <Grid item xs={12}>
                                                     <FormControl variant="outlined">
                                                         <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="mapSelect">Map</InputLabel>
                                                         <Select
@@ -146,7 +145,7 @@ class BuildTactic extends Component {
                                                         </Select>
                                                     </FormControl>
                                                 </Grid>
-                                                <Grid item xs={9}>
+                                                {/* <Grid item xs={9}>
                                                     <TextField
                                                     className={classes.urlTextField}
                                                     onChange={this.handleChange}
@@ -154,7 +153,7 @@ class BuildTactic extends Component {
                                                     name='imgUrl'
                                                     label="Image URL"
                                                     />
-                                                </Grid>
+                                                </Grid> */}
                                             </Grid>
                                         </Grid>
                                         <Grid item xs={12}>

@@ -60,7 +60,7 @@ class PlayerProfile extends Component {
                 spacing={16} style={{padding: 20}}>
                     <Grid item xs={3} spacing={16}>
                         <Card className={(classNames(classes.Card))}>
-                            <img src={this.props.reduxState.userPlayerReducer.image_url} height="300" width="300" alt="ProfileImg"></img>
+                            <img src={this.props.reduxState.userPlayerReducer.image_url} height="200" alt="ProfileImg"></img>
                             <Typography  variant="display1" align="center">
                             {this.props.reduxState.userPlayerReducer.alias}
                                 <Typography variant="caption">
