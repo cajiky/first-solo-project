@@ -1,3 +1,52 @@
+# CS-MANAGER
+
+CS-Manager is a application built as a solution to the lack of organization/structure around Counter-Strike Teams across all skill levels. The problem is young players coming into the scene, getting on teams, and dreaming of huge ambitions of becoming a great
+player when the grow up, but at the same time this mindset is what will set them back. These kids are letting their egos get ahead of them and they arnt willing to put in the time and effort to progressing as an idividual, to become that amazing player one day. CS-Manager will give any team owner/captian/leader/coach the backbone of structure behind any and hopefully every team. 
+
+## Built With
+- Javascript
+- HTML/JSX
+- React
+- Postgresql
+- Material-UI
+- React-Redux
+- Redux-Sagas
+- Node.js
+- Express
+- Moment.js
+- Passport.js
+
+### Prerequisites
+
+Link to software that is required before you attempt to start the app (e.g. node, mongo).
+
+- [Node.js](https://nodejs.org/en/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [VSCode](https://code.visualstudio.com/)
+- [Nodemon](https://nodemon.io/)
+
+## Screen Shot
+
+![Player Profile Component](documentation/project/playerProfile.jpg)
+![Events Page Component](documentation/project/eventsPage.png)
+![Tactics Page](documentation/project/tacticsPage.png)
+
+
+### Installing
+
+Steps to get the development environment running.
+
+1. Download this project.
+2. `npm install`
+3. `npm start`
+4. Open two console windows
+5. Create a Data Base named 'cs_manager' in postgresql
+6. Run database.sql files inside of your postgresql 
+7. `npm run server`
+8. `npm run client`
+
+
+
 # Prime Project
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
@@ -48,7 +97,7 @@ If you would like to name your database something else, you will need to change 
 
 To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+![VSCode Toolbar](=)
 
 Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
 
