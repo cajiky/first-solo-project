@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './about.css';
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -8,15 +8,20 @@ import React from 'react';
 const AboutPage = () => (
   <div>
     <div>
+      <ul>
+        <li>Javascript-</li>
+        <li>HTML/JSX</li>
+        <li>React</li>
+        <li>Postgresql</li>
+        <li>Material-UI</li>
+        <li>React-redux</li>
+        <li>Redux-Sagas</li>
+        <li>Node.js</li>
+        <li>Express</li>
+        <li>Moment.js</li>
+      </ul>
       <p>
-        Javascript-
-        HTML-
-        React-
-        Postgresql-
-        Material-ui-
-        React-redux-
-        Nodeexpress-
-        Axios
+        
       </p>
     </div>
   </div>

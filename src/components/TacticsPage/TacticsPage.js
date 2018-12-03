@@ -66,10 +66,9 @@ class TacticsPage extends Component {
                 <Grid container spacing={16} direction="row" justify="center" style={{padding: 10,}}>
                     <Grid item xs={2}></Grid>
                     <Grid item xs={2}>
-                        <h2>Drop Down</h2>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography variant='h2' align="center" className={classes.heading}>Tactics</Typography>
+                        <Typography variant='h2' align="center">Tactics</Typography>
                     </Grid>
                     <Grid item xs={4}></Grid>
                 </Grid>

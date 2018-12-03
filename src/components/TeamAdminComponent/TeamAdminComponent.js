@@ -6,6 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Paper from '@material-ui/core/Paper'
 
 
 const styles = theme => ({
@@ -15,7 +19,6 @@ const styles = theme => ({
     },
     portalCard:{
         padding: 20,
-        height: 800
     },
 })
 
@@ -23,7 +26,8 @@ class TeamAdminComponent extends Component {
     
     //Will reach out to the server and grab the team info data from the teams table
     getTeamInfo = () => {
-        this.props.dispatch({type:'GET_TEAM_DATA_SAGA'})
+        this.props.dispatch({type:'GET_TEAM_DATA_SAGA'});
+        this.props.dispatch({type:'GET_ALL_PLAYERS_FOR_TEAM'});
     }
 
     componentDidMount() {
@@ -43,7 +47,7 @@ class TeamAdminComponent extends Component {
                 alignItems="stretch"
                 spacing={16} style={{padding: 24}}>
                 <Grid item xs={3}> 
-                    <Card className={(classNames(classes.Card))}>
+                    <Card align="center" className={(classNames(classes.Card))}>
                         <img src={this.props.reduxState.teamReducer.img} height="200"  alt="ProfileImg"></img>
                         <Typography  variant="display1" align="center">
                             {this.props.reduxState.teamReducer.name}
@@ -57,20 +61,44 @@ class TeamAdminComponent extends Component {
                         </Button>
                         <br />
                         <br />
+                        <Button variant="raised" onClick={this.props.moveToBuildTacticPage}>
+                            Build Tactic
+                        </Button>
+                        <br />
+                        <br />
                         <Button variant="raised" onClick={this.props.moveToCreateTeamPage}>
                             Edit Team Profile
                         </Button>
                         <br />
-                        <br />
-                        <Button variant="raised" onClick={this.props.moveToBuildTacticPage}>
-                            Build Tactic
-                        </Button>
                     </Card>
                 </Grid>
                     <Grid item xs={9}>
-                        <Card className={(classNames(classes.portalCard))}>
-                            <Typography variant="h1" align="center">DISPLAY SOME STUFF</Typography>
-                        </Card>
+                        <Paper className={(classNames(classes.portalCard))}>
+                        <Grid container spacing={24} direction="row" justify="center" alignItems="flex-start" className={classes.cardContainer}>
+                            {this.props.reduxState.teamPlayersReducer.map(player => (
+                                <Grid item xs={4} key={player.id}>
+                                <Card className={classes.standardCard}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        component="img"
+                                        className={classes.media}
+                                        image={player.image_url}
+                                        title={player.alias}
+                                        />
+                                        <CardContent>
+                                            <Typography gutterButtom variant='h5'>
+                                                {player.first_name}
+                                            </Typography>
+                                            <Typography component='h5'>
+                                                {player.last_name}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card> 
+                            </Grid>
+                            ))}
+                            </Grid>
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>

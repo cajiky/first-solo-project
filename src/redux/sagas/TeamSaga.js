@@ -13,12 +13,18 @@ function* checkTeamOwnerSaga(){
     yield put({type: 'SET_TEAM_OWNER_STATUS', payload: isTeamOwner});
 }
 
+function* getAllPlayersFor(){
+    const team = yield call(axios.get, '/api/teams/players');
+    yield put({type: 'SET_PLAYERS_FOR_TEAM', payload: team});
+}
+
 
 
 //Main function to export to our main watcher saga
 function* teamEditSaga(){
     yield takeEvery('GET_TEAM_DATA_SAGA', getTeamSaga);
     yield takeEvery('CHECK_TEAM_OWNER_SAGA', checkTeamOwnerSaga);
+    yield takeEvery('GET_ALL_PLAYERS_FOR_TEAM', getAllPlayersFor)
 }
 
 export default teamEditSaga; 
