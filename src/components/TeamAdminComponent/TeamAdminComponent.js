@@ -43,7 +43,7 @@ class TeamAdminComponent extends Component {
                 alignItems="stretch"
                 spacing={16} style={{padding: 24}}>
                 <Grid item xs={3}> 
-                    <Card className={(classNames(classes.Card))}>
+                    <Card align="center" className={(classNames(classes.Card))}>
                         <img src={this.props.reduxState.teamReducer.img} height="200"  alt="ProfileImg"></img>
                         <Typography  variant="display1" align="center">
                             {this.props.reduxState.teamReducer.name}

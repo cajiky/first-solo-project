@@ -24,9 +24,17 @@ import BuildTactic from '../BuildTactic/BuildTactic';
 import TacticsPage from '../TacticsPage/TacticsPage';
 import CreateEventPage from '../CreateEventPage/CreateEventPage';
 import EventsPage from '../EventsPage/EventsPage';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import './App.css';
 import { userInfo } from 'os';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 class App extends Component {
   componentDidMount () {
@@ -35,8 +43,11 @@ class App extends Component {
 
   render() {
     return (
+      
       <Router>
         <div>
+        <MuiThemeProvider theme={theme}>
+        <CssBaseline>
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -116,6 +127,8 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
+          </CssBaseline>
+          </MuiThemeProvider> 
         </div>
       </Router>
   )}

@@ -6,7 +6,13 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+const theme = createMuiTheme({
+    palette: {
+      type: 'dark',
+    },
+  });
 
 //Stying
 const styles = theme => ({
@@ -40,10 +46,10 @@ class EventsPage extends Component{
         const { classes } = this.props;
         return(
             <React.Fragment> 
+                <MuiThemeProvider theme={theme}>
                 <Grid container spacing={16} direction="row" justify="center" style={{padding: 10,}}>
                     <Grid item xs={2}></Grid>
                     <Grid item xs={2}>
-                        <h2>Drop Down</h2>
                     </Grid>
                     <Grid item xs={4}>
                             <Typography variant='h2' align="center">Events</Typography>
@@ -69,7 +75,7 @@ class EventsPage extends Component{
                                                 </Grid>
                                                 
                                                 <Grid item xs={12} className={classes.descriptionSection}>
-                                                    <Typography component="p">{event.description}</Typography>
+                                                    <Typography variant="caption">{event.description}</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Card>
@@ -79,6 +85,8 @@ class EventsPage extends Component{
                         </Paper>
                     </Grid>
                 </Grid>
+                {/* <WithTheme /> */}
+            </MuiThemeProvider>
             </React.Fragment>
 
         )
