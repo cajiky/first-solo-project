@@ -15,6 +15,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+//In charge of getting all the players for a particular team
+router.get('/players', rejectUnauthenticated, (req,res) => {
+    pool.query(`SELECT * FROM "players" WHERE id=${req.user.id}`)
+    .then((result) => {
+        pool.query(`SELECT * FROM "players" WHERE team=${result.rows[0].team}`)
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    })
+    .catch((error) => {
+        console.log('error in our get request inside /api/teams/players', error);
+    })
+})
+
 //going to check to see if the loggedin user is the owner of a team
 router.get('/teamOwner', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "teams" ORDER BY id ASC`)

@@ -18,7 +18,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "players" WHERE id=${req.user.id}`)
     .then((result) => {
         const team = result.rows[0].team;
-        pool.query(`SELECT * FROM "events" WHERE team = ${team} ORDER BY date DESC, event_start ASC;`)
+        pool.query(`SELECT * FROM "events" WHERE team = ${team} ORDER BY date ASC, event_start ASC;`)
         .then((result) => {
             res.send(result.rows);
         })

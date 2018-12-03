@@ -38,6 +38,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
     bigCards: {
         marginTop: theme.spacing.unit *5,
         maxWidth: 400,
+        padding: 10,
     }
   });
 
@@ -101,7 +102,11 @@ class PlayerProfileEdit extends Component {
             <React.Fragment> 
             <CssBaseline />
         <div className="main-container">
-            <Grid container spacing={8} direction="row" alignItems="center" justify="space-evenly" className={classes.root} > 
+        <Grid container 
+                direction="row"
+                justify="center"
+                alignItems="stretch"
+                spacing={16} style={{padding: 24}}>
                 <Grid item xs={6}>
                 <Card className={classNames(classes.bigCards)}>
                     <form onSubmit={this.submitEdit}>
@@ -165,7 +170,7 @@ class PlayerProfileEdit extends Component {
                 </Card>
                 </Grid>
                 <Grid item xs={6}>
-                <Card className={classNames(classes.bigCards)}> 
+                <Card className={classNames(classes.bigCards)} align="center"> 
                         <form>
                             <FormControl className={classNames(classes.margin, classes.textField)}>
                                 <TextField 
@@ -217,7 +222,7 @@ class PlayerProfileEdit extends Component {
                         />
                             </FormControl>
                             <br />
-                            <img src={this.props.reduxState.userPlayerReducer.image_url} height="100px" width="100px" />
+                            <img src={this.props.reduxState.userPlayerReducer.image_url} height="300" />
                             <br />
                             <FormControl className={classNames(classes.margin, classes.textField)}>
                             <InputLabel htmlFor="img">Profile Image URL</InputLabel>
