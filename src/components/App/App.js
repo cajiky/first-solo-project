@@ -23,6 +23,7 @@ import TeamProfilePage from '../TeamProfilePage/TeamProfilePage';
 import BuildTactic from '../BuildTactic/BuildTactic';
 import TacticsPage from '../TacticsPage/TacticsPage';
 import CreateEventPage from '../CreateEventPage/CreateEventPage';
+import EventsPage from '../EventsPage/EventsPage';
 
 import './App.css';
 import { userInfo } from 'os';
@@ -104,6 +105,12 @@ class App extends Component {
             exact
             path="/createEvent"
             component={CreateEventPage}
+            />
+            {/* This is the route to the "Events Page" */}
+            <ProtectedRoute
+            exact
+            path="/events"
+            component={EventsPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
