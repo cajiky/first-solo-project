@@ -19,6 +19,7 @@ const AboutPage = () => (
         <li>Node.js</li>
         <li>Express</li>
         <li>Moment.js</li>
+        <li>Passport.js</li>
       </ul>
       <p>
         
