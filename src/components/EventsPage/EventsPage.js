@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
+import moment from 'moment';
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +19,9 @@ const styles = theme => ({
     card:{
         padding: 20,
         marginBottom: 10,
+    },
+    descriptionSection:{
+        margin: 20,
     }
 })
 
@@ -52,16 +56,20 @@ class EventsPage extends Component{
                             <Grid container spacing={24} direction="row" justify="center" alignItems="flex-start" className={classes.cardContainer}>
                                 <Grid item xs={12}>
                                     {this.props.reduxState.eventPageReducer.map(event => (
-                                        <Card className={classes.card}>
+                                        <Card className={classes.card} key={event.id}>
                                             <Grid container direction="row" justify="space-between" alignItems="stretch"  className={classes.eventsContainer}>
                                                 <Grid item xs={3}>
                                                     <Typography variant="h5">{event.name}</Typography> 
                                                 </Grid>
                                                 <Grid item xs={6} align="center">
-                                                    <Typography variant="subheading">{event.event_start} - {event.event_end}</Typography>
+                                                    <Typography variant="subheading">{moment(event.event_start, "HH:mm:ss").format('hh:mm A')} - {moment(event.event_end, "HH:mm:ss").format('hh:mm A')}</Typography>
                                                 </Grid>
                                                 <Grid item xs={3}>
-                                                    <Typography variant="subheading">{event.date}</Typography>
+                                                    <Typography variant="subheading">{moment(event.date).format('MMMM Do YYYY')}</Typography>
+                                                </Grid>
+                                                
+                                                <Grid item xs={12} className={classes.descriptionSection}>
+                                                    <Typography component="p">{event.description}</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Card>
